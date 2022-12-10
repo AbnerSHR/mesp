@@ -34,11 +34,13 @@ class TestChallenge(unittest.TestCase):
         sys.argv.append('1,9,5,0,20,-4,12,16,7')
         sys.argv.append('12')
         atest = mesp.check_command_line_parameters()
-        self.assertEqual(atest, ['-4,16', '0,12', '5,7'])
+        # self.asserttEqual(atest, ['-4,16', '0,12', '5,7'])
+        self.assertTrue(compare_lists(atest, ['-4,16', '0,12', '5,7']))
 
     def test_check_sum_parameters_01(self):
         atest = mesp.check_sum_parameters('1,9,5,0,20,-4,12,16,7', '12')
-        self.assertEqual(atest, ['-4,16', '0,12', '5,7'])
+        # self.assertEqual(atest, ['-4,16', '0,12', '5,7'])
+        self.assertTrue(compare_lists(atest, ['-4,16', '0,12', '5,7']))
 
     def test_check_sum_parameters_02_from_file(self):
         fname = 'tests.txt'
@@ -78,7 +80,8 @@ class TestChallenge(unittest.TestCase):
 
     def test_check_sum_01(self):
         atest = mesp.check_sum([1, 9, 5, 0, 20, -4, 12, 16, 7], 12)
-        self.assertEqual(atest, ['-4,16', '0,12', '5,7'])
+        # self.assertEqual(atest, ['-4,16', '0,12', '5,7'])
+        self.assertTrue(compare_lists(atest, ['-4,16', '0,12', '5,7']))
 
 
 test_result = unittest.main(argv=[''], verbosity=1, exit=False)

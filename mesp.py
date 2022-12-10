@@ -51,10 +51,19 @@ def check_sum(alist: list, asum: int):
         return []
 
     asums = []
-    for i in range(len(alist)):
-        for j in range(i+1, len(alist)):
-            if alist[i] + alist[j] == asum:
-                asums.append(f'{alist[i]},{alist[j]}')
+    for i in range(len(alist)-1, -1, -1):
+        anum = alist[i]
+        del alist[i]
+        difference = asum - anum
+        if difference == asum // 2:
+            # You can assume that there aren't
+            # any repeat values in the list.
+            continue
+        if difference in alist:
+            asums.append(f'{anum},{difference}')
+        # for j in range(i+1, len(alist)):
+        #     if alist[i] + alist[j] == asum:
+        #         asums.append(f'{alist[i]},{alist[j]}')
 
     return asums
 
