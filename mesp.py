@@ -1,4 +1,5 @@
 import sys
+# import big_o
 
 
 def print_how_to_use_it():
@@ -34,36 +35,29 @@ def check_sum_parameters(par1_list: str, par2_sum: str):
     return check_sum(alist, asum)
 
 
-def check_sum(alist: list, asum: int):
+def check_sum(alist: list, asum: int = 12):  # asum default to 12 to big-o test
 
+    # Check the length of the list
     if len(alist) < 2:
         # print('No pair found.')
         return []
 
-    alist.sort()
+    asums = []  # to save results
 
-    if (alist[0] + alist[1]) > asum:
-        # print('No pair found.')
-        return []
-    prior = alist[-2:][1]
-    if alist[-1] + prior < asum:
-        # print('No pair found.')
-        return []
-
-    asums = []
+    # Let's check the list from the last item
     for i in range(len(alist)-1, -1, -1):
         anum = alist[i]
-        del alist[i]
+        del alist[i]  # remove de item from the list
+
         difference = asum - anum
+
         if difference == asum // 2:
             # You can assume that there aren't
             # any repeat values in the list.
             continue
         if difference in alist:
+            # There is a match, so put it in the results list
             asums.append(f'{anum},{difference}')
-        # for j in range(i+1, len(alist)):
-        #     if alist[i] + alist[j] == asum:
-        #         asums.append(f'{alist[i]},{alist[j]}')
 
     return asums
 
@@ -73,4 +67,7 @@ if __name__ == '__main__':
     for r in result:
         print(r)
 
-
+    # A single big-O test (must uncomment the 2nd line of code) and install the package [pip install big-o]
+    # ig = lambda n: big_o.datagen.integers(n, -10000, 10000)
+    # best, others = big_o.big_o(check_sum, ig, n_repeats=100)
+    # print(best)
